@@ -1,8 +1,11 @@
 package ui.tools;
 
+import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Car;
 import model.Customer;
 
 // main menu of the application where user is given different choices to choose from each leading to a different menu
@@ -42,12 +45,16 @@ public class MainMenu {
 
     // EFFECTS: Processes the input of the user if it doesn't match any of the given options nothing will happen.
     private void processInput(String input) {
-        if (input.equals("a")) {
-            addCustomer();
-        } else if (input.equals("r")) {
-            removeCustomer();
-        } else if (input.equals("e")) {
-            editCustomer();
+        switch (input) {
+            case "a":
+                addCustomer();
+                break;
+            case "r":
+                removeCustomer();
+                break;
+            case "e":
+                editCustomer();
+                break;
         }
     }
 
@@ -56,31 +63,45 @@ public class MainMenu {
         new CustomerEditorMenu(customers);
     }
 
-    //EFFECTS: removes a customer by inputing the customers name in this current console ui,
-    //         however would like to change this to a button when implementing a GUI.
+    //REQUIRES: at least two customers must be present
+    //EFFECTS: removes a customer by inputting the customers name in this current console ui,
+    //         however would like to change this to a button when implementing a GUI cannot remove all
+    //         the customers.
     private void removeCustomer() {
         String removedCustomer = null;
+        System.out.println("Please enter name of customer you would like to remove: ");
+        String customerName = input.next();
         for (Customer c : customers) {
-            if (c.getName().equals(this.input.next())) {
+            if (c.getName().equals(customerName)) {
                 removedCustomer = c.getName();
                 customers.remove(c);
             }
         }
         if (removedCustomer == null) {
-            System.out.println("No customer with name: " + input);
+            System.out.println("No customer with name: " + customerName);
         } else {
             System.out.println("Removed customer: " + removedCustomer);
         }
+
+        printAllCustomers();
     }
 
     // EFFECTS: Opens the add customer menu and prints out the list of all customers names.
     private void addCustomer() {
         new AddCustomerMenu(customers);
-        ArrayList<String> customerNames = new ArrayList<>();
+        printAllCustomers();
+    }
+
+    public void printAllCustomers() {
+        System.out.println("All customers: ");
+        ArrayList<String> cars = new ArrayList<>();
+
         for (Customer c : customers) {
-            customerNames.add(c.getName());
+            for (Car car : c.getCars()) {
+                cars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
+                System.out.println(c.getName() + " | " + c.getEmail() + " | " + c.getPhoneNumber() + " | " + cars);
+            }
         }
-        System.out.println("all customers: " + customerNames);
     }
 
     // inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp.git

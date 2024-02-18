@@ -1,8 +1,10 @@
 package ui.tools;
 
+import model.Car;
 import model.Customer;
 
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,9 +44,10 @@ public class CustomerEditorMenu {
         new MainMenu();
     }
 
+    //REQUIRES: edit a customer there must be a customer available
+    //EFFECTS : edits the different fields of the customer
     private void processInput(String input) {
-        Customer customerEdited = null;
-        pickCustomerOption();
+        Customer customerEdited = pickCustomerOption();
         switch (input) {
             case "n":
                 System.out.println("please enter new name");
@@ -52,7 +55,8 @@ public class CustomerEditorMenu {
                 System.out.println("Customer new name: " + customerEdited.getName());
                 break;
             case "1":
-                new CarEditorMenu(customerEdited.getCars());
+                new CarEditorMenu(customerEdited);
+                printListOfCars();
                 break;
             case "p":
                 System.out.println("please enter new phone number");
@@ -67,15 +71,25 @@ public class CustomerEditorMenu {
         }
     }
 
-    private void pickCustomerOption() {
+    private void printListOfCars() {
+        Customer customerChosen = pickCustomerOption();
+        ArrayList<String> allCars = new ArrayList<>();
+        for (Car c : customerChosen.getCars()) {
+            String nameOfCar = c.getYear() + " " + c.getMake() + " " + c.getModel();
+            allCars.add(nameOfCar);
+        }
+        System.out.println(allCars);
+    }
+
+    private Customer pickCustomerOption() {
         System.out.println("Please pick customer you would like to edit");
         String chosenCustomer = this.input.next();
-        Customer customerEdited = null;
         for (Customer c : customers) {
             if (c.getName().equals(chosenCustomer)) {
-                customerEdited = c;
+                return c;
             }
         }
+        return null;
     }
 
     private void displayChoices() {

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarTest {
 
@@ -24,6 +24,19 @@ public class CarTest {
         assertEquals("1HGBH41JXMN109186", testCar.getVin());
         assertEquals("Mitsubishi", testCar.getMake());
         assertEquals("Rvr ES", testCar.getModel());
+    }
+
+    @Test
+    public void testListsForVin() {
+        List<Character> testNumberVinList = new ArrayList<>();
+        Collections.addAll(testNumberVinList, '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        List<Character> testLetterVinList = new ArrayList<>();
+        Collections.addAll(testLetterVinList, 'A', 'B', 'C', 'D', 'E', 'F', 'G');
+        Collections.addAll(testLetterVinList, 'H', 'J', 'K', 'L', 'M', 'N', 'P');
+        Collections.addAll(testLetterVinList, 'R', 'S', 'T', 'V', 'W', 'X');
+
+        assertEquals(testLetterVinList, testCar.getLetterVinList());
+        assertEquals(testNumberVinList, testCar.getNumberVinList());
     }
 
     @Test

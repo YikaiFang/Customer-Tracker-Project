@@ -23,6 +23,10 @@ public class Customer {
         cars = new ArrayList<>();
     }
 
+    public void something() {
+        //TODO figure something out for this
+    }
+
     //MODIFIES: this
     //EFFECTS: add a car to the current list of cars and prints the list of cars
     public void addCar(Car car) {
@@ -52,8 +56,9 @@ public class Customer {
 
     //MODIFIES: this
     //EFFECTS : removes the given car from the list of cars and prints a message
-    public void remove(Car car) {
-
+    public String remove(Car car) {
+        cars.remove(car);
+        return car.getMake() + car.getModel();
     }
 
     public String getName() {

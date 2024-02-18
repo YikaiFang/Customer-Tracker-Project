@@ -1,5 +1,6 @@
 package ui.tools;
 
+import model.Car;
 import model.Customer;
 
 import java.util.ArrayList;
@@ -25,13 +26,22 @@ public class AddCustomerMenu {
     private void addNewCustomer() {
         System.out.println("Please enter name: ");
         String name = input.next();
-        System.out.println("Please enter emails: ");
+        System.out.println("Please enter email: ");
         String email = input.next();
         System.out.println("Please enter phone number: ");
         String phoneNumber = input.next();
         Customer addedCustomer = new Customer(name, email, phoneNumber);
+        System.out.println("Please enter vin Number of car: ");
+        String vin = input.next().toUpperCase();
+        System.out.println("Please enter make of the car: ");
+        String make = input.next();
+        System.out.println("Please enter the model of the car: ");
+        String model = input.next();
+        Car addedCar = new Car(vin, make, model);
+        addedCustomer.addCar(addedCar);
+        System.out.println("Added new car " + addedCar.getYear() +  " " + make +  " " + model
+                + " to " + addedCustomer.getName());
         customers.add(addedCustomer);
-        //new CarEditorMenu(addedCustomer.getCars());
     }
 }
 

@@ -24,3 +24,4 @@
 - As a user, I want to be able to view all previously visited customers and access them from the list.
 - As a user, I want to be able to edit the information of a customer in case of changes that may happen
 in the future.
+- As a user, I want to be able to get the year of the car from the vin number

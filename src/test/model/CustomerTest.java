@@ -1,5 +1,5 @@
 package model;
 
 class CustomerTest {
-    // delete or rename this class!
+    //TODO finish the test after implementing something().
 }

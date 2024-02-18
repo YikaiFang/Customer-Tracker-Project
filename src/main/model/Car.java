@@ -11,10 +11,10 @@ import java.util.List;
 
 public class Car {
 
-    private String vin;
+    private final String vin;
     private int year;
-    private String make;
-    private String model;
+    private final String make;
+    private final String model;
     private List<Character> numberVinList;
     private List<Character> letterVinList;
 
@@ -62,17 +62,22 @@ public class Car {
         Collections.addAll(letterVinList, 'R', 'S', 'T', 'V', 'W', 'X', 'Y');
     }
 
-    // REQUIRES: char x must be a character from letterVinList.
+    // REQUIRES: char x must be a character from letterVinList or Y.
     // EFFECTS : changes a character to the corresponding amount needed to go from 2000 to the year shown
     //           on the vin number if character is Y then it will return 0.
     public int letterToNumber(char x) {
+        List<Character> letterVinListWithoutY = new ArrayList<>();
+        Collections.addAll(letterVinListWithoutY, 'A', 'B', 'C', 'D', 'E', 'F', 'G');
+        Collections.addAll(letterVinListWithoutY, 'H', 'J', 'K', 'L', 'M', 'N', 'P');
+        Collections.addAll(letterVinListWithoutY, 'R', 'S', 'T', 'V', 'W', 'X');
+
         List<Integer> integers = new ArrayList<>();
         Collections.addAll(integers, 10, 11, 12, 13, 14, 15, 16);
         Collections.addAll(integers, 17, 18, 19, 20, 21, 22, 23);
-        Collections.addAll(integers, -6, -5, -4, -3, -2, -1, 0);
+        Collections.addAll(integers, -6, -5, -4, -3, -2, -1);
 
         int index = 0;
-        for (Character c : letterVinList) {
+        for (Character c : letterVinListWithoutY) {
             if (x == c) {
                 return integers.get(index);
             }
@@ -97,4 +102,11 @@ public class Car {
         return model;
     }
 
+    public List<Character> getLetterVinList() {
+        return letterVinList;
+    }
+
+    public List<Character> getNumberVinList() {
+        return numberVinList;
+    }
 }
