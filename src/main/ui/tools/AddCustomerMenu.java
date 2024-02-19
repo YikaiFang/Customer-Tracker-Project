@@ -6,23 +6,33 @@ import model.Customer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// is a customer adder menu where user inputs all the needed information excluding cars of a customer
+/*
+Is a customer adder menu where user inputs all the needed information and creates a new customer and adds it
+to the list of customers.
+ */
+
 public class AddCustomerMenu {
 
     private Scanner input;
     private ArrayList<Customer> customers;
 
+    //EFFECTS: Runs the customer menu
     public AddCustomerMenu(ArrayList<Customer> customers) {
         this.customers = customers;
         runAddCustomerMenu();
     }
 
+    //EFFECTS: Starts the process of asking for information on a customer.
     private void runAddCustomerMenu() {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
         addNewCustomer();
     }
 
+    //REQUIRES: entered phone number must be a combination of 10 digits 0-9, vin number must be a 17 digit
+    //          combination of letters and numbers 1-9, excluding I,O,Q,U, and Z.
+    //EFFECTS : asks for all the information about the customer and creates a new customer with all that information
+    //          and adds it to the list of customers.
     private void addNewCustomer() {
         System.out.println("Please enter name: ");
         String name = input.next();

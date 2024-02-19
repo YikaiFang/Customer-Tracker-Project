@@ -1,14 +1,16 @@
 package ui.tools;
 
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import model.Car;
 import model.Customer;
 
-// main menu of the application where user is given different choices to choose from each leading to a different menu
+/*
+Main menu of the application where user is given different choices to choose from each leading to different menus.
+ */
+
 public class MainMenu {
 
     private Scanner input;
@@ -25,10 +27,11 @@ public class MainMenu {
     public void runMainMenu() {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
-        Boolean isStillRunning = true;
-        String input = null;
+        boolean isStillRunning = true;
+        String input;
 
         while (isStillRunning) {
+            printAllCustomers();
             displayMenu();
             input = this.input.next().toLowerCase();
 
@@ -55,7 +58,29 @@ public class MainMenu {
             case "e":
                 editCustomer();
                 break;
+            case "s":
+                searchForCustomer();
+                break;
+            default:
+                System.out.println("Invalid option, must choose one of the options listed above.");
+                break;
         }
+    }
+
+    //REQUIRES: !customers.isEmpty();
+    //EFFECTS : Finds the customer in the list of all the customers with the name and prints out
+    //          all the information about that customer.
+    private void searchForCustomer() {
+        Customer nullCustomer = new Customer(null, null, null);
+        System.out.println("Please enter customer name");
+        String name = input.next();
+        Customer chosenCustomer = nullCustomer.findCustomer(customers, name);
+        ArrayList<String> customerCars = new ArrayList<>();
+        for (Car car : chosenCustomer.getCars()) {
+            customerCars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
+        }
+        System.out.println(chosenCustomer.getName() + " | " + chosenCustomer.getEmail()
+                + " | " + chosenCustomer.getPhoneNumber() + " | " + customerCars);
     }
 
     //EFFECTS: opens the customer editor menu
@@ -64,43 +89,44 @@ public class MainMenu {
     }
 
     //REQUIRES: at least two customers must be present
-    //EFFECTS: removes a customer by inputting the customers name in this current console ui,
-    //         however would like to change this to a button when implementing a GUI cannot remove all
-    //         the customers.
+    //EFFECTS : removes a customer by inputting the customers name in this current console ui,
+    //          however would like to change this to a button when implementing a GUI cannot remove all
+    //          the customers.
     private void removeCustomer() {
-        String removedCustomer = null;
+        String removedCustomer = "";
         System.out.println("Please enter name of customer you would like to remove: ");
         String customerName = input.next();
-        for (Customer c : customers) {
-            if (c.getName().equals(customerName)) {
-                removedCustomer = c.getName();
-                customers.remove(c);
+
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getName().equals(customerName)) {
+                removedCustomer = customers.get(i).getName();
+                customers.remove(customers.get(i));
             }
         }
-        if (removedCustomer == null) {
+
+        if (Objects.equals(removedCustomer, "")) {
             System.out.println("No customer with name: " + customerName);
         } else {
             System.out.println("Removed customer: " + removedCustomer);
         }
-
-        printAllCustomers();
     }
 
     // EFFECTS: Opens the add customer menu and prints out the list of all customers names.
     private void addCustomer() {
         new AddCustomerMenu(customers);
-        printAllCustomers();
     }
 
+    // REQUIRES: customers is not an empty list
+    // EFFECTS : prints out a list of all the customers with their personal info and a list of their cars
     public void printAllCustomers() {
         System.out.println("All customers: ");
-        ArrayList<String> cars = new ArrayList<>();
 
         for (Customer c : customers) {
+            ArrayList<String> cars = new ArrayList<>();
             for (Car car : c.getCars()) {
                 cars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
-                System.out.println(c.getName() + " | " + c.getEmail() + " | " + c.getPhoneNumber() + " | " + cars);
             }
+            System.out.println(c.getName() + " | " + c.getEmail() + " | " + c.getPhoneNumber() + " | " + cars);
         }
     }
 
@@ -111,6 +137,7 @@ public class MainMenu {
         System.out.println("a -> Add new customer");
         System.out.println("r -> Remove customer");
         System.out.println("e -> edit a customer");
+        System.out.println("s -> search for customer");
         System.out.println("q -> quit application");
     }
 }

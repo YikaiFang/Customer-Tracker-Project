@@ -23,8 +23,15 @@ public class Customer {
         cars = new ArrayList<>();
     }
 
-    public void something() {
-        //TODO figure something out for this
+    //EFFECTS: finds the customer in a list of customers with the name and returns that customer
+    public Customer findCustomer(ArrayList<Customer> customers, String name) {
+        for (Customer c : customers) {
+            if (c.getName().equals(name)) {
+                return c;
+            }
+        }
+
+        return null;
     }
 
     //MODIFIES: this
@@ -56,9 +63,8 @@ public class Customer {
 
     //MODIFIES: this
     //EFFECTS : removes the given car from the list of cars and prints a message
-    public String remove(Car car) {
+    public void removeCar(Car car) {
         cars.remove(car);
-        return car.getMake() + car.getModel();
     }
 
     public String getName() {

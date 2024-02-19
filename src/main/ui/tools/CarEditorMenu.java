@@ -6,17 +6,21 @@ import model.Customer;
 import java.util.Objects;
 import java.util.Scanner;
 
-// edits and add new cars to a selected customer and takes in a list of the customers current cars.
+/*
+Edits and add new cars to a selected customer and takes in a list of the customers current cars.
+ */
 public class CarEditorMenu {
 
     private Scanner input;
-    private final Customer addedCustomer;
+    private final Customer editedCustomer;
 
-    public CarEditorMenu(Customer addedCustomer) {
-        this.addedCustomer = addedCustomer;
+    //EFFECTS: Starts the car editor menu
+    public CarEditorMenu(Customer editedCustomer) {
+        this.editedCustomer = editedCustomer;
         runCarEditorMenu();
     }
 
+    //EFFECTS: keeps the car editor menu running.
     private void runCarEditorMenu() {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
@@ -47,6 +51,9 @@ public class CarEditorMenu {
             case "r":
                 removeCar();
                 break;
+            default:
+                System.out.println("That option is not valid please pick a valid option.");
+                break;
         }
     }
 
@@ -55,15 +62,15 @@ public class CarEditorMenu {
     private void removeCar() {
         System.out.println("Successfully removed: "
                 + pickedCar().getYear() + " " + pickedCar().getMake() + " " + pickedCar().getModel());
-        addedCustomer.remove(pickedCar());
-        new CarEditorMenu(addedCustomer);
+        editedCustomer.removeCar(pickedCar());
+        new CarEditorMenu(editedCustomer);
     }
 
     private Car pickedCar() {
         System.out.println("Insert vin: ");
         String vin = input.next();
 
-        for (Car c : addedCustomer.getCars()) {
+        for (Car c : editedCustomer.getCars()) {
             if (Objects.equals(vin, c.getVin())) {
                 return c;
             }
@@ -71,6 +78,8 @@ public class CarEditorMenu {
         return null;
     }
 
+    //EFFECTS: asks for the information of a car and creates a new car which is then added to the customer
+    //         being edited
     private void addCar() {
         System.out.println("Insert vin: ");
         String vin = input.next();
@@ -79,11 +88,12 @@ public class CarEditorMenu {
         System.out.println("Model of the car: ");
         String model = input.next();
         Car addedCar = new Car(vin, make, model);
-        addedCustomer.addCar(addedCar);
+        editedCustomer.addCar(addedCar);
         System.out.println("Added new car " + addedCar.getYear() +  " " + make +  " " + model
-                            + " to " + addedCustomer.getName());
+                            + " to " + editedCustomer.getName());
     }
 
+    //EFFECTS: displays the possible choices for the user.
     private void displayChoices() {
         System.out.println("a -> add car");
         System.out.println("r -> remove car");

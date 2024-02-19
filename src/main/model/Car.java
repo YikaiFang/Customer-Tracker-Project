@@ -47,15 +47,17 @@ public class Car {
         }
     }
 
-    //EFFECTS: a list with all the possible number values for the tenth character of a vin number
-    public void setNumberVinList() {
+    //MODIFIES: this
+    //EFFECTS : a list with all the possible number values for the tenth character of a vin number
+    public final void setNumberVinList() {
         numberVinList = new ArrayList<>();
         Collections.addAll(numberVinList, '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
     }
 
-    //EFFECTS: a list with all the possible letter values for the tenth character of a vin number
-    public void setLetterVinList() {
+    //MODIFIES: this
+    //EFFECTS : a list with all the possible letter values for the tenth character of a vin number
+    public final void setLetterVinList() {
         letterVinList = new ArrayList<>();
         Collections.addAll(letterVinList, 'A', 'B', 'C', 'D', 'E', 'F', 'G');
         Collections.addAll(letterVinList, 'H', 'J', 'K', 'L', 'M', 'N', 'P');

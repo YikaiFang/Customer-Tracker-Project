@@ -9,6 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*
+A test suite for the car class
+ */
+
 public class CarTest {
 
     private Car testCar;
