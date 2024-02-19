@@ -33,9 +33,9 @@ public class CustomerEditorMenu {
         System.out.println("Welcome to customer editor menu");
         boolean isRunning = true;
         String input;
+        Customer pickedCustomer = pickCustomerOption();
 
         while (isRunning) {
-            Customer pickedCustomer = pickCustomerOption();
             displayChoices();
             input = this.input.next().toLowerCase();
 
@@ -52,32 +52,32 @@ public class CustomerEditorMenu {
     //REQUIRES: edit a customer there must be a customer available and name must match the customer exactly
     //MODIFIES: customer
     //EFFECTS : edits the different fields of the customer
-    private void processInput(String input, Customer customerEdited) {
-        if (invalidInput()) {
-            System.out.println("Invalid input please enter a valid option");
-        } else {
-            switch (input) {
-                case "n":
-                    editName(customerEdited);
-                    break;
-                case "c":
-                    new CarEditorMenu(customerEdited);
-                    System.out.println(allCars);
-                    break;
-                case "p":
-                    editPhoneNumber(customerEdited);
-                    break;
-                case "e":
-                    editEmail(customerEdited);
-                    break;
-            }
+    private void processInput(String input, Customer pickedCustomer) {
+        switch (input) {
+            case "n":
+                System.out.println("please enter new name");
+                pickedCustomer.changeName(this.input.next());
+                System.out.println("Customer new name: " + pickedCustomer.getName());
+                break;
+            case "c":
+                new CarEditorMenu(pickedCustomer);
+                System.out.println(allCars);
+                break;
+            case "p":
+                System.out.println("please enter new phone number");
+                pickedCustomer.changePhoneNumber(this.input.next());
+                System.out.println("Customer new phone number: " + pickedCustomer.getPhoneNumber());
+                break;
+            case "e":
+                System.out.println("please enter new email");
+                pickedCustomer.changeEmail(this.input.next());
+                System.out.println("Customer new email: " + pickedCustomer.getEmail());
+                break;
         }
-
     }
 
     //EFFECTS: edits the email of the customer being edited.
     private void editEmail(Customer customerEdited) {
-        System.out.println("please enter new email");
         String newEmail = this.input.next();
         customerEdited.changeEmail(newEmail);
         System.out.println("new email: " + newEmail);
@@ -85,7 +85,6 @@ public class CustomerEditorMenu {
 
     //EFFECTS: edits the phone number of the customer being edited.
     private void editPhoneNumber(Customer customerEdited) {
-        System.out.println("please enter new phone number");
         String newPhoneNumber = this.input.next();
         customerEdited.changePhoneNumber(newPhoneNumber);
         System.out.println("new phone number: " + newPhoneNumber);
@@ -93,7 +92,6 @@ public class CustomerEditorMenu {
 
     //EFFECTS: edits the name of the customer being edited.
     private void editName(Customer customerEdited) {
-        System.out.println("Please enter new name");
         String newName = this.input.next();
         customerEdited.changeName(newName);
         System.out.println("new name: " + newName);

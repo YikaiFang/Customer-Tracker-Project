@@ -51,6 +51,8 @@ public class CarEditorMenu {
             case "r":
                 removeCar();
                 break;
+            case "f":
+                break;
             default:
                 System.out.println("That option is not valid please pick a valid option.");
                 break;

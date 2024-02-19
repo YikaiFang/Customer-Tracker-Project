@@ -79,8 +79,10 @@ public class MainMenu {
         for (Car car : chosenCustomer.getCars()) {
             customerCars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
         }
-        System.out.println(chosenCustomer.getName() + " | " + chosenCustomer.getEmail()
+        System.out.println("Result: " + chosenCustomer.getName() + " | " + chosenCustomer.getEmail()
                 + " | " + chosenCustomer.getPhoneNumber() + " | " + customerCars);
+        displayMenu();
+        processInput(input.next());
     }
 
     //EFFECTS: opens the customer editor menu

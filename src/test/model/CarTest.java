@@ -37,10 +37,10 @@ public class CarTest {
         List<Character> testLetterVinList = new ArrayList<>();
         Collections.addAll(testLetterVinList, 'A', 'B', 'C', 'D', 'E', 'F', 'G');
         Collections.addAll(testLetterVinList, 'H', 'J', 'K', 'L', 'M', 'N', 'P');
-        Collections.addAll(testLetterVinList, 'R', 'S', 'T', 'V', 'W', 'X');
+        Collections.addAll(testLetterVinList, 'R', 'S', 'T', 'V', 'W', 'X', 'Y');
 
-        assertEquals(testLetterVinList, testCar.getLetterVinList());
         assertEquals(testNumberVinList, testCar.getNumberVinList());
+        assertEquals(testLetterVinList, testCar.getLetterVinList());
     }
 
     @Test
