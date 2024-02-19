@@ -1,6 +1,5 @@
 package ui.tools;
 
-import model.Car;
 import model.Customer;
 
 
@@ -16,7 +15,6 @@ public class CustomerEditorMenu {
 
     private Scanner input;
     private ArrayList<Customer> customers;
-    private ArrayList<String> allCars;
 
     //EFFECTS: Runs the main customer editor menu
     public CustomerEditorMenu(ArrayList<Customer> customers) {
@@ -61,7 +59,6 @@ public class CustomerEditorMenu {
                 break;
             case "c":
                 new CarEditorMenu(pickedCustomer);
-                System.out.println(allCars);
                 break;
             case "p":
                 System.out.println("please enter new phone number");
@@ -76,38 +73,6 @@ public class CustomerEditorMenu {
         }
     }
 
-    //EFFECTS: edits the email of the customer being edited.
-    private void editEmail(Customer customerEdited) {
-        String newEmail = this.input.next();
-        customerEdited.changeEmail(newEmail);
-        System.out.println("new email: " + newEmail);
-    }
-
-    //EFFECTS: edits the phone number of the customer being edited.
-    private void editPhoneNumber(Customer customerEdited) {
-        String newPhoneNumber = this.input.next();
-        customerEdited.changePhoneNumber(newPhoneNumber);
-        System.out.println("new phone number: " + newPhoneNumber);
-    }
-
-    //EFFECTS: edits the name of the customer being edited.
-    private void editName(Customer customerEdited) {
-        String newName = this.input.next();
-        customerEdited.changeName(newName);
-        System.out.println("new name: " + newName);
-    }
-
-    //REQUIRES: !customerChosen.getCars().isEmpty();
-    //MODIFIES: this
-    //EFFECTS : sets allCars with the name of each car that the customer has
-    private void setAllCarsName() {
-        Customer customerChosen = pickCustomerOption();
-        allCars = new ArrayList<>();
-        for (Car c : customerChosen.getCars()) {
-            String nameOfCar = c.getYear() + " " + c.getMake() + " " + c.getModel();
-            allCars.add(nameOfCar);
-        }
-    }
 
     //EFFECTS: Picks a customer to edit and if there is no match print a message.
     private Customer pickCustomerOption() {
@@ -122,11 +87,6 @@ public class CustomerEditorMenu {
         return null;
     }
 
-    private boolean invalidInput() {
-        String input = this.input.next().toLowerCase();
-        return !input.equals("n") && !input.equals("c") && !input.equals("p")
-                && !input.equals("e") && !input.equals("a");
-    }
 
     //EFFECTS: displays all the possible options to choose from.
     private void displayChoices() {
