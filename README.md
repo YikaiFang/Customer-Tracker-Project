@@ -24,3 +24,7 @@
 - As a user, I want to be able to edit the information of a customer in case of changes that may happen
 in the future.
 - As a user, I want to be able to get the year of the car from the vin number
+
+- As a user, I want to be able to save my entire program with all the information about each customer such as their
+name, email, phone number and cars. 
+- As a user, I want to be able to be able to load specific customers from the file.
