@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import model.Car;
+import model.CarShop;
 import model.Customer;
 
 /*
@@ -14,11 +15,12 @@ Main menu of the application where user is given different choices to choose fro
 public class MainMenu {
 
     private Scanner input;
-    private ArrayList<Customer> customers;
+    private CarShop carShop;
 
     // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
     public MainMenu() {
-        customers = new ArrayList<>();
+        //customers = new ArrayList<>();
+        carShop = new CarShop("South Auto Center");
         runMainMenu();
     }
 
@@ -74,7 +76,7 @@ public class MainMenu {
         Customer nullCustomer = new Customer(null, null, null);
         System.out.println("Please enter customer name");
         String name = input.next();
-        Customer chosenCustomer = nullCustomer.findCustomer(customers, name);
+        Customer chosenCustomer = nullCustomer.findCustomer(carShop.getCustomers(), name);
         ArrayList<String> customerCars = new ArrayList<>();
         for (Car car : chosenCustomer.getCars()) {
             customerCars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
@@ -87,7 +89,7 @@ public class MainMenu {
 
     //EFFECTS: opens the customer editor menu
     private void editCustomer() {
-        new CustomerEditorMenu(customers);
+        new CustomerEditorMenu(carShop.getCustomers());
     }
 
     //REQUIRES: at least two customers must be present
@@ -98,6 +100,7 @@ public class MainMenu {
         String removedCustomer = "";
         System.out.println("Please enter name of customer you would like to remove: ");
         String customerName = input.next();
+        ArrayList<Customer> customers = carShop.getCustomers();
 
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getName().equals(customerName)) {
@@ -115,7 +118,7 @@ public class MainMenu {
 
     // EFFECTS: Opens the add customer menu and prints out the list of all customers names.
     private void addCustomer() {
-        new AddCustomerMenu(customers);
+        new AddCustomerMenu(carShop.getCustomers());
     }
 
     // REQUIRES: customers is not an empty list
@@ -123,7 +126,7 @@ public class MainMenu {
     public void printAllCustomers() {
         System.out.println("All customers: ");
 
-        for (Customer c : customers) {
+        for (Customer c : carShop.getCustomers()) {
             ArrayList<String> cars = new ArrayList<>();
             for (Car car : c.getCars()) {
                 cars.add(car.getYear() + " " + car.getMake() + " " + car.getModel());
