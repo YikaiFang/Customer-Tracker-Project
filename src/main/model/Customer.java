@@ -5,9 +5,13 @@ package model;
  phone number and an email
  */
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistance.Writable;
+
 import java.util.ArrayList;
 
-public class Customer {
+public class Customer implements Writable {
 
     private String name;
     private ArrayList<Car> cars;
@@ -81,5 +85,25 @@ public class Customer {
 
     public ArrayList<Car> getCars() {
         return cars;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("phone number", phoneNumber);
+        json.put("email", email);
+        json.put("cars", carToJson());
+        return json;
+    }
+
+    private JSONArray carToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Car c : cars) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 }

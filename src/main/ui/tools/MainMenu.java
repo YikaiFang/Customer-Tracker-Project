@@ -1,5 +1,7 @@
 package ui.tools;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,6 +9,8 @@ import java.util.Scanner;
 import model.Car;
 import model.CarShop;
 import model.Customer;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
 /*
 Main menu of the application where user is given different choices to choose from each leading to different menus.
@@ -14,13 +18,17 @@ Main menu of the application where user is given different choices to choose fro
 
 public class MainMenu {
 
+    private static final String JSON_STORE = "./data/carShop.json";
     private Scanner input;
     private CarShop carShop;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
-    public MainMenu() {
-        //customers = new ArrayList<>();
+    public MainMenu() throws FileNotFoundException {
         carShop = new CarShop("South Auto Center");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runMainMenu();
     }
 
@@ -62,6 +70,12 @@ public class MainMenu {
                 break;
             case "s":
                 searchForCustomer();
+                break;
+            case "save":
+                saveCustomers();
+                break;
+            case "load":
+                loadCustomers();
                 break;
             default:
                 System.out.println("Invalid option, must choose one of the options listed above.");
@@ -135,6 +149,29 @@ public class MainMenu {
         }
     }
 
+    // EFFECTS: saves the workroom to file
+    private void saveCustomers() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(carShop);
+            jsonWriter.close();
+            System.out.println("Saved " + carShop.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadCustomers() {
+        try {
+            carShop = jsonReader.read();
+            System.out.println("Loaded " + carShop.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
     // inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     // EFFECTS: displays all the choices with the format input key -> what it does.
     private void displayMenu() {
@@ -143,6 +180,8 @@ public class MainMenu {
         System.out.println("r -> Remove customer");
         System.out.println("e -> edit a customer");
         System.out.println("s -> search for customer");
+        System.out.println("save -> save current customers to a file");
+        System.out.println("load -> customers from a file");
         System.out.println("q -> quit application");
     }
 }

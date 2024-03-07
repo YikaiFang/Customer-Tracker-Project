@@ -5,11 +5,14 @@ A car class with a vin number, make, and model and takes the vin number to deter
 manufactured.
  */
 
+import org.json.JSONObject;
+import persistance.Writable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Car {
+public class Car implements Writable {
 
     private final String vin;
     private int year;
@@ -110,5 +113,15 @@ public class Car {
 
     public List<Character> getNumberVinList() {
         return numberVinList;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("car year", year);
+        json.put("car make", make);
+        json.put("car model", model);
+        json.put("vin", vin);
+        return json;
     }
 }
