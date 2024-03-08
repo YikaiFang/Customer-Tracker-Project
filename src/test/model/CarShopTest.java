@@ -1,7 +1,5 @@
 package model;
 
-import model.CarShop;
-import model.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

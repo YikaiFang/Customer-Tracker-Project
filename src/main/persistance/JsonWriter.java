@@ -6,12 +6,12 @@ import org.json.JSONObject;
 import java.io.*;
 
 
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of carShop to file
 //Taken from the JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
-    private String destination;
+    private final String destination;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -22,11 +22,11 @@ public class JsonWriter {
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
+        writer = new PrintWriter(destination);
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of carShop to file
     public void write(CarShop carShop) {
         JSONObject json = carShop.toJson();
         saveToFile(json.toString(TAB));

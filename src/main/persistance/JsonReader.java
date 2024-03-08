@@ -11,10 +11,10 @@ import model.CarShop;
 import model.Customer;
 import org.json.*;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads car shop from JSON data stored in file
 //Taken from the JsonSerializationDemo https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -26,7 +26,7 @@ public class JsonReader {
     public CarShop read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseWorkRoom(jsonObject);
+        return parseCarShop(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -34,22 +34,22 @@ public class JsonReader {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s));
+            stream.forEach(contentBuilder::append);
         }
 
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
-    private CarShop parseWorkRoom(JSONObject jsonObject) {
+    // EFFECTS: parses car shop from JSON object and returns it
+    private CarShop parseCarShop(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         CarShop carShop = new CarShop(name);
         addCustomers(carShop, jsonObject);
         return carShop;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: carShop
+    // EFFECTS: parses customers from JSON object and adds them to carShop
     private void addCustomers(CarShop carShop, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("customer");
         for (Object json : jsonArray) {
@@ -58,8 +58,9 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: carShop
+    // EFFECTS: parses customer from JSON object and adds it to carShop also parses cars from JSON object
+    //          and adds them to the customer.
     private void addCustomer(CarShop carShop, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String phoneNumber = jsonObject.getString("phone number");
@@ -73,6 +74,8 @@ public class JsonReader {
         carShop.addCustomer(customer);
     }
 
+    // MODIFIES: customer
+    // EFFECTS : parses car and adds it to carShop.
     private void addCar(Customer customer, JSONObject jsonObject) {
         String make = jsonObject.getString("car make");
         String model = jsonObject.getString("car model");

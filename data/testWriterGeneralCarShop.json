@@ -17,8 +17,8 @@
                 }
             ],
             "name": "name",
-            "phone number": "name@gmail.com",
-            "email": "88888888"
+            "phone number": "88888888",
+            "email": "name@gmail.com"
         },
         {
             "cars": [{
@@ -28,8 +28,8 @@
                 "car year": 2021
             }],
             "name": "something",
-            "phone number": "something@gmail.com",
-            "email": "777777777"
+            "phone number": "777777777",
+            "email": "something@gmail.com"
         }
     ]
 }

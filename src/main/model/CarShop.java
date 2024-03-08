@@ -9,8 +9,8 @@ import java.util.ArrayList;
 // a CarShop class to hold the
 public class CarShop implements Writable {
 
-    private String name;
-    private ArrayList<Customer> customers;
+    private final String name;
+    private final ArrayList<Customer> customers;
 
     //EFFECTS: constructor
     public CarShop(String name) {

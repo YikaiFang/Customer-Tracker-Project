@@ -21,8 +21,8 @@ public class MainMenu {
     private static final String JSON_STORE = "./data/carShop.json";
     private Scanner input;
     private CarShop carShop;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
     public MainMenu() throws FileNotFoundException {

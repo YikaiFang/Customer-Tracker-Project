@@ -1,0 +1,36 @@
+{
+  "name": "South Auto Center",
+  "customer": [
+    {
+      "cars": [
+        {
+          "car model": "f-150",
+          "car make": "ford",
+          "vin": "1HGBH41JXMN109186",
+          "car year": 2021
+        }, {
+          "car model": "civic",
+          "car make": "honda",
+          "vin": "4Y1SL65848Z411439",
+          "car year": 2008
+        }
+      ],
+      "name": "name",
+      "phone number": "name@gmail.com",
+      "email": "88888888"
+    },
+    {
+      "cars": [
+        {
+          "car model": "x5",
+          "car make": "bmw",
+          "vin": "1HGBH41JXMN109186",
+          "car year": 2021
+        }
+      ],
+      "name": "something",
+      "phone number": "something@gmail.com",
+      "email": "777777777"
+    }
+  ]
+}
