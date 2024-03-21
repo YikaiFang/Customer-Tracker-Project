@@ -5,6 +5,7 @@ import model.Customer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.*;
 
 /*
 Is a customer adder menu where user inputs all the needed information and creates a new customer and adds it

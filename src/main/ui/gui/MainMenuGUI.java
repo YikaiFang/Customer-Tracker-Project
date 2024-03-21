@@ -1,5 +1,8 @@
-package ui.tools;
+package ui.gui;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,25 +15,65 @@ import model.CarShop;
 import model.Customer;
 import persistance.JsonReader;
 import persistance.JsonWriter;
+import ui.tools.AddCustomerMenu;
+import ui.tools.CustomerEditorMenu;
 
 /*
 Main menu of the application where user is given different choices to choose from each leading to different menus.
  */
 
-public class MainMenu {
+public class MainMenuGUI extends JFrame {
 
     private static final String JSON_STORE = "./data/carShop.json";
     private Scanner input;
     private CarShop carShop;
-    private final JsonWriter jsonWriter;
-    private final JsonReader jsonReader;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private JButton addCustomerButton;
+    private JButton editCustomerButton;
+    private JButton removeCustomerButton;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JList<String> customerList;
+    private DefaultListModel<String> customers;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 700;
 
     // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
-    public MainMenu() throws FileNotFoundException {
+    public MainMenuGUI() throws FileNotFoundException {
+        super("South Auto Center");
+        initializeFields();
+        initializeGraphics();
+    }
+
+    private void initializeGraphics() {
+        setLayout(new BorderLayout());
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        runMainMenu();
+    }
+
+    private void initializeFields() {
         carShop = new CarShop("South Auto Center");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        runMainMenu();
+        addCustomerButton = new JButton("add customer");
+        editCustomerButton = new JButton("edit customer menu");
+        removeCustomerButton = new JButton("remove customer");
+        saveButton = new JButton("save");
+        loadButton = new JButton("load");
+        this.add(addCustomerButton);
+        this.add(editCustomerButton);
+        this.add(removeCustomerButton);
+        this.add(saveButton);
+        this.add(loadButton);
+        customers = new DefaultListModel<>();
+        customerList = new JList<>(customers);
+        customerList.setBounds(300, 0, 700, 700);
+        this.add(customerList);
+
     }
 
     // inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
@@ -60,7 +103,7 @@ public class MainMenu {
     // EFFECTS: Processes the input of the user if it doesn't match any of the given options nothing will happen.
     private void processInput(String input) {
         switch (input) {
-            case "a":
+            case "add customer":
                 addCustomer();
                 break;
             case "r":
@@ -176,13 +219,52 @@ public class MainMenu {
     // inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     // EFFECTS: displays all the choices with the format input key -> what it does.
     private void displayMenu() {
-        System.out.println("Choices: ");
-        System.out.println("a -> Add new customer");
-        System.out.println("r -> Remove customer");
-        System.out.println("e -> edit a customer");
-        System.out.println("s -> search for customer");
-        System.out.println("save -> save current customers to a file");
-        System.out.println("load -> customers from a file");
-        System.out.println("q -> quit application");
+        addCustomerButton.setSize(300,50);
+        addCustomerButton.setBounds(0, 0, 300, 50);
+        addCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(addCustomerButton)) {
+                    addCustomer();
+                }
+            }
+        });
+        editCustomerButton.setBounds(0, 50, 300, 50);
+        editCustomerButton.setSize(300, 50);
+        editCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (customerList.getSelectedIndex() != -1) {
+                    editCustomer();
+                }
+            }
+        });
+        removeCustomerButton.setSize(300,50);
+        removeCustomerButton.setBounds(0, 100, 300, 50);
+        removeCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (customerList.getSelectedIndex() != -1) {
+                    removeCustomer();
+                }
+            }
+        });
+        saveButton.setSize(300,50);
+        saveButton.setBounds(0, 150, 300, 50);
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveCustomers();
+            }
+        });
+        loadButton.setSize(300,50);
+        loadButton.setBounds(0, 200, 300, 50);
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadCustomers();
+            }
+        });
+
     }
 }

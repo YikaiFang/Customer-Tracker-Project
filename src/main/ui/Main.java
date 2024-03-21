@@ -1,5 +1,6 @@
 package ui;
 
+import ui.gui.MainMenuGUI;
 import ui.tools.MainMenu;
 
 import java.io.FileNotFoundException;
@@ -8,7 +9,7 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
         try {
-            new MainMenu();
+            new MainMenuGUI();
         } catch (FileNotFoundException e) {
             System.out.println("Unable to run application: file not found");
         }
