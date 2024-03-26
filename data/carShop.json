@@ -2,34 +2,48 @@
     "name": "South Auto Center",
     "customer": [
         {
-            "cars": [
-                {
-                    "car model": "f-150",
-                    "car make": "ford",
-                    "vin": "1HGBH41JXMN109186",
-                    "car year": 2021
-                },
-                {
-                    "car model": "civic",
-                    "car make": "honda",
-                    "vin": "4Y1SL65848Z411439",
-                    "car year": 2008
-                }
-            ],
+            "cars": [{
+                "car model": "f-150",
+                "car make": "ford ",
+                "vin": "451j1iough13ku",
+                "car year": 0
+            }],
             "name": "name",
-            "phone number": "name@gmail.com",
-            "email": "88888888"
+            "phone number": "8888888",
+            "email": "name@gmail.com"
         },
         {
             "cars": [{
-                "car model": "x5",
-                "car make": "bmw",
-                "vin": "1HGBH41JXMN109186",
-                "car year": 2021
+                "car model": "asdfasdfas",
+                "car make": "asdfasdfas",
+                "vin": "1111111111",
+                "car year": 2001
             }],
-            "name": "something",
-            "phone number": "something@gmail.com",
-            "email": "777777777"
+            "name": "asdfasd",
+            "phone number": "asdfasd",
+            "email": "asdfasdf"
+        },
+        {
+            "cars": [{
+                "car model": "a;dlsfkjas;dl",
+                "car make": "asd;lfkaj",
+                "vin": "234523452345234",
+                "car year": 2003
+            }],
+            "name": "nasdme",
+            "phone number": ";laksdjf;laksjd;l",
+            "email": "asdfjsk;dlk"
+        },
+        {
+            "cars": [{
+                "car model": "asdfasd",
+                "car make": "sdfasdf",
+                "vin": "%$54235435a",
+                "car year": 2005
+            }],
+            "name": "adsfasdfa",
+            "phone number": "asdfasdf",
+            "email": "asdfasd"
         }
     ]
 }
