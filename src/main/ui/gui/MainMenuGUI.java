@@ -5,9 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 
+import model.Car;
 import model.CarShop;
+import model.Customer;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 import ui.Main;
@@ -84,8 +87,8 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     //EFFECTS : removes a customer by inputting the customers name in this current console ui,
     //          however would like to change this to a button when implementing a GUI cannot remove all
     //          the customers.
-    private void removeCustomer() {
-
+    private void removeCustomer(int index) {
+        customers.remove(index);
     }
 
     private void initializeSearchBar() {
@@ -108,9 +111,17 @@ public class MainMenuGUI extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(carShop);
             jsonWriter.close();
-            System.out.println("Saved " + carShop.getName() + " to " + JSON_STORE);
+
+            JOptionPane.showMessageDialog(null,
+                    "Saved " + carShop.getName() + " to " + JSON_STORE,
+                    "saved",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(null,
+                    "Unable to write to file: " + JSON_STORE,
+                    "saved",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -119,9 +130,16 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     private void loadCustomers() {
         try {
             carShop = jsonReader.read();
-            System.out.println("Loaded " + carShop.getName() + " from " + JSON_STORE);
+            savedCustomer();
+            JOptionPane.showMessageDialog(null,
+                    "Loaded " + carShop.getName() + " from " + JSON_STORE,
+                    "loaded",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(null,
+                    "Unable to read from file: " + JSON_STORE,
+                    "loaded",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -181,14 +199,25 @@ public class MainMenuGUI extends JFrame implements ActionListener {
             addCustomer();
         } else if (e.getSource().equals(editCustomerButton)) {
             editCustomer();
-        } else if (e.getSource().equals(removeCustomerButton)) {
-            removeCustomer();
+        } else if (customerList.getSelectedIndex() != -1 && e.getSource().equals(removeCustomerButton)) {
+            removeCustomer(customerList.getSelectedIndex());
         } else if (e.getSource().equals(saveButton)) {
             saveCustomers();
         } else if (e.getSource().equals(loadButton)) {
             loadCustomers();
         } else if (e.getSource().equals(surpriseButton)) {
             surprise();
+        }
+    }
+
+    public void savedCustomer() {
+        for (Customer customer : carShop.getCustomers()) {
+            String information = customer.getName() + " | " + customer.getEmail() + " | " + customer.getPhoneNumber();
+            ArrayList<String> cars = new ArrayList<>();
+            for (Car c : customer.getCars()) {
+                cars.add(c.getYear() + " " + c.getMake() + " " + c.getModel());
+            }
+            this.customers.addElement(information + " | " + cars);
         }
     }
 }
