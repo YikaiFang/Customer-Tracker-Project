@@ -1,14 +1,27 @@
 {
     "name": "South Auto Center",
-    "customer": [{
-        "cars": [{
-            "car model": "adsfadfa",
-            "car make": "adsfasdf",
-            "vin": "123441234123",
-            "car year": 2001
-        }],
-        "name": "asdfasd",
-        "phone number": "asdfasdfadsf",
-        "email": "fadfasdf"
-    }]
+    "customer": [
+        {
+            "cars": [{
+                "car model": "something",
+                "car make": "something",
+                "vin": "4Y1SL65848Z411439",
+                "car year": 2008
+            }],
+            "name": "name",
+            "phone number": "888888888",
+            "email": "name@gmail.com"
+        },
+        {
+            "cars": [{
+                "car model": "1325113223",
+                "car make": "14513",
+                "vin": "sadaf13241",
+                "car year": 2001
+            }],
+            "name": "adfqef",
+            "phone number": "12351253",
+            "email": "adfad"
+        }
+    ]
 }

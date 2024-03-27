@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Creates a pop-up that asks for information on a customer and adds it.
 public class AddCustomerMenuGUI extends JFrame {
 
     private JTextField nameField;
@@ -18,7 +19,7 @@ public class AddCustomerMenuGUI extends JFrame {
     private DefaultListModel<String> customers;
     private List<Customer> shopCustomers;
 
-    // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
+    // EFFECTS: constructs the menu gui
     public AddCustomerMenuGUI(DefaultListModel<String> customers, List<Customer> shopCustomers) {
         try {
             this.customers = customers;
@@ -29,6 +30,9 @@ public class AddCustomerMenuGUI extends JFrame {
         }
     }
 
+    //MODIFIES: customers
+    //EFFECTS : produces a JOptionPane and asks for the information of the customer then
+    //          adds it to the list.
     private void runAddCustomerMenu() {
         initializeTextFields();
 
@@ -41,28 +45,33 @@ public class AddCustomerMenuGUI extends JFrame {
                 "car make", carMakeField
         };
 
-        JOptionPane.showConfirmDialog(null, fields, "Please enter:", JOptionPane.OK_CANCEL_OPTION);
+        int n = JOptionPane.showConfirmDialog(null, fields, "Please enter:", JOptionPane.OK_CANCEL_OPTION);
         String name = nameField.getText();
         String email = emailField.getText();
         String phoneNumber = phoneNumberField.getText();
         String vin = carVinField.getText();
         String model = carModelField.getText();
         String make = carMakeField.getText();
-        Customer customer = new Customer(name, phoneNumber, email);
-        Car car = new Car(vin, model, make);
-        customer.addCar(car);
-        this.shopCustomers.add(customer);
-        this.customers.addElement(informationString(customer, car));
+        if (n == JOptionPane.OK_OPTION) {
+            Customer customer = new Customer(name, phoneNumber, email);
+            Car car = new Car(vin, model, make);
+            customer.addCar(car);
+            this.shopCustomers.add(customer);
+            this.customers.addElement(informationString(customer));
+        }
     }
 
-    private String informationString(Customer customer, Car car) {
+    //EFFECTS: returns a string value of the customers information and their car information.
+    private String informationString(Customer customer) {
         ArrayList<String> cars = new ArrayList<>();
         for (Car c : customer.getCars()) {
-            cars.add(car.getYear() + " " + c.getMake() + " " + c.getModel());
+            cars.add(c.getYear() + " " + c.getMake() + " " + c.getModel());
         }
         return customer.getName() + " | " + customer.getPhoneNumber() + " | " + customer.getEmail() + " | " + cars;
     }
 
+    //MODIFIES: this
+    //EFFECTS: initializes all the JTextFields.
     private void initializeTextFields() {
         nameField = new JTextField();
         emailField = new JTextField();
