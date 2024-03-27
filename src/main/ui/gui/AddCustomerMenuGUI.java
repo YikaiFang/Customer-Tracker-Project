@@ -20,9 +20,17 @@ public class AddCustomerMenuGUI extends JFrame {
 
     // EFFECTS: constructs the main menu and runs the method mainMenu() and also instantiating a list of customers
     public AddCustomerMenuGUI(DefaultListModel<String> customers, List<Customer> shopCustomers) {
+        try {
+            this.customers = customers;
+            this.shopCustomers = shopCustomers;
+            runAddCustomerMenu();
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+
+    private void runAddCustomerMenu() {
         initializeTextFields();
-        this.customers = customers;
-        this.shopCustomers = shopCustomers;
 
         Object[] fields = {
                 "name", nameField,

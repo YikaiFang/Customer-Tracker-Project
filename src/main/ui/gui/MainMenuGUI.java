@@ -10,6 +10,7 @@ import javax.swing.*;
 import model.CarShop;
 import persistance.JsonReader;
 import persistance.JsonWriter;
+import ui.Main;
 import ui.tools.CustomerEditorMenu;
 
 /*
@@ -125,6 +126,31 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     }
 
     private void surprise() {
+        JFrame frame = new JFrame();
+        ImageIcon imageIcon =
+                new ImageIcon("C:/Users/super/IdeaProjects/project_h4p6l/src/main/gregor-kiczales-2023-profile.jpg");
+        JLabel label = new JLabel(imageIcon);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width) / 2;
+        int y = (screenSize.height) / 2;
+
+        label.setText("Trust the natural recursion");
+        label.setHorizontalTextPosition(JLabel.CENTER);
+        label.setVerticalTextPosition(JLabel.TOP);
+        label.setIconTextGap(-350);
+        label.setFont(new Font("Courier New", Font.BOLD, 20));
+        label.setForeground(Color.RED);
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
+        frame.setResizable(false);
+        frame.add(label);
+        frame.setLocation(x, y);
+        frame.setVisible(true);
+
+        System.out.println(imageIcon.getIconHeight() + " " + imageIcon.getIconWidth());
+
     }
 
     // inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
