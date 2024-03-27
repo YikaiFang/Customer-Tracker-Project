@@ -21,16 +21,18 @@ public class CustomerEditorMenuGUI extends JFrame {
 
             Object[] fields = {"name", nameField, "email", emailField, "phone number", phoneNumberField};
 
-            JOptionPane.showConfirmDialog(null, fields, "Please enter changes:", JOptionPane.OK_CANCEL_OPTION);
+            int n = JOptionPane.showConfirmDialog(null, fields, "Please enter changes:", JOptionPane.OK_CANCEL_OPTION);
             String name = nameField.getText();
             String email = emailField.getText();
             String phoneNumber = phoneNumberField.getText();
 
-            customer.changeName(name);
-            customer.changeEmail(email);
-            customer.changePhoneNumber(phoneNumber);
+            if (n == JOptionPane.OK_OPTION) {
+                customer.changeName(name);
+                customer.changeEmail(email);
+                customer.changePhoneNumber(phoneNumber);
 
-            customerList.set(index, informationString(customer));
+                customerList.set(index, informationString(customer));
+            }
         } catch (Exception e) {
             //do nothing
         }

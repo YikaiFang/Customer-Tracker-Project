@@ -28,3 +28,17 @@ in the future.
 - As a user, I want to be able to save my entire program with all the information about each customer such as their
 name, email, phone number and cars. 
 - As a user, I want to be able to be able to load specific customers from the file.
+
+## Instruction for grader
+1. press add customer and fill in the required fields, VIN number should be all caps.
+2. choose any button to press,
+- Edit customer: select a customer from the list by clicking on it and then pressing the edit customer button
+a pop-up with the current customer information will appear and then edit and finally press okay.
+- Edit car: similarly select a customer from the list by clicking it and then pressing edit cars button.
+You will be prompted with 2 choices if you pick add then enter the fields and a new car will be added. To remove
+a car select a car by pressing on it in the list and then press remove.
+- Remove customer: select a customer from the list by clicking on it and then pressing the remove button which 
+will result in the removal of the selected customer.
+- Save: click save button to save current customer
+- LOad: click load button to load a past list of customers.
+- Surprise button: click this for a surprise.
