@@ -41,8 +41,8 @@ public class AddCustomerMenuGUI extends JFrame {
                 "email", emailField,
                 "phone number", phoneNumberField,
                 "car vin", carVinField,
-                "car model", carModelField,
-                "car make", carMakeField
+                "car make", carMakeField,
+                "car model", carModelField
         };
 
         int n = JOptionPane.showConfirmDialog(null, fields, "Please enter:", JOptionPane.OK_CANCEL_OPTION);
@@ -54,7 +54,7 @@ public class AddCustomerMenuGUI extends JFrame {
         String make = carMakeField.getText();
         if (n == JOptionPane.OK_OPTION) {
             Customer customer = new Customer(name, phoneNumber, email);
-            Car car = new Car(vin, model, make);
+            Car car = new Car(vin, make, model);
             customer.addCar(car);
             this.shopCustomers.add(customer);
             this.customers.addElement(informationString(customer));

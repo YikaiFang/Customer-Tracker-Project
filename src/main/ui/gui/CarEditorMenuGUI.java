@@ -61,15 +61,15 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
     //MODIFIES: this, customer
     //EFFECTS : creates a JOptionPane which asks for the fields of a car to create a new car.
     private void addNewCar() {
-        Object[] fields = {"car vin", carVinField, "car model", carModelField, "car make", carMakeField};
+        Object[] fields = {"car vin", carVinField, "car model", carMakeField, "car make", carModelField};
 
         JOptionPane.showConfirmDialog(null, fields, "Please enter:", JOptionPane.OK_CANCEL_OPTION);
         String vin = carVinField.getText();
         String model = carModelField.getText();
         String make = carMakeField.getText();
-        Car car = new Car(vin, model, make);
+        Car car = new Car(vin, make, model);
         cars.add(car);
-        carInfo.addElement(car.getYear() + " " + car.getModel() + " " + car.getMake());
+        carInfo.addElement(car.getYear() + " " + car.getMake() + " " + car.getModel());
         customers.set(selectedIndex, informationString(customer));
     }
 
