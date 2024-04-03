@@ -4,7 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistance.Writable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // a CarShop class to hold the
 public class CarShop implements Writable {
@@ -21,7 +23,22 @@ public class CarShop implements Writable {
     //MODIFIES: this
     //EFFECTS : adds customer to the list of customer
     public void addCustomer(Customer customer) {
+        EventLog.getInstance().logEvent(new Event("Added new customer: " + customer.getName()));
         customers.add(customer);
+    }
+
+    public void removeCustomer(Customer customer) {
+        EventLog.getInstance().logEvent(new Event("Customer removed: " + customer.getName()));
+        customers.add(customer);
+    }
+
+    public ArrayList<Event> printEventLog(Iterator<Event> events) {
+        ArrayList<Event> allEvents = new ArrayList<>();
+        for (Iterator<Event> it = events; it.hasNext(); ) {
+            Event e = it.next();
+            allEvents.add(e);
+        }
+        return allEvents;
     }
 
     public ArrayList<Customer> getCustomers() {

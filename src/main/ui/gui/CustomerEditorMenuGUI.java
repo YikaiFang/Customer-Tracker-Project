@@ -27,10 +27,15 @@ public class CustomerEditorMenuGUI extends JFrame {
             String phoneNumber = phoneNumberField.getText();
 
             if (n == JOptionPane.OK_OPTION) {
-                customer.changeName(name);
-                customer.changeEmail(email);
-                customer.changePhoneNumber(phoneNumber);
-
+                if (!name.equals(customer.getName())) {
+                    customer.changeName(name);
+                }
+                if (!email.equals(customer.getEmail())) {
+                    customer.changeEmail(email);
+                }
+                if (!phoneNumber.equals(customer.getPhoneNumber())) {
+                    customer.changePhoneNumber(phoneNumber);
+                }
                 customerList.set(index, informationString(customer));
             }
         } catch (Exception e) {

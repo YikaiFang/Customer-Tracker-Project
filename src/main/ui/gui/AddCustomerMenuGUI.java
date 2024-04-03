@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.Car;
+import model.CarShop;
 import model.Customer;
 
 import javax.swing.*;
@@ -17,13 +18,13 @@ public class AddCustomerMenuGUI extends JFrame {
     private JTextField carModelField;
     private JTextField carMakeField;
     private DefaultListModel<String> customers;
-    private List<Customer> shopCustomers;
+    private CarShop carShop;
 
     // EFFECTS: constructs the menu gui
-    public AddCustomerMenuGUI(DefaultListModel<String> customers, List<Customer> shopCustomers) {
+    public AddCustomerMenuGUI(DefaultListModel<String> customers, CarShop carShop) {
         try {
             this.customers = customers;
-            this.shopCustomers = shopCustomers;
+            this.carShop = carShop;
             runAddCustomerMenu();
         } catch (Exception e) {
             //do nothing
@@ -55,8 +56,8 @@ public class AddCustomerMenuGUI extends JFrame {
         if (n == JOptionPane.OK_OPTION) {
             Customer customer = new Customer(name, phoneNumber, email);
             Car car = new Car(vin, make, model);
+            this.carShop.addCustomer(customer);
             customer.addCar(car);
-            this.shopCustomers.add(customer);
             this.customers.addElement(informationString(customer));
         }
     }

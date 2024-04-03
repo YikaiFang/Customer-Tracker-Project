@@ -6,11 +6,14 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.*;
 
 import model.Car;
 import model.CarShop;
 import model.Customer;
+import model.Event;
+import model.EventLog;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
@@ -41,13 +44,27 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         initializeFields();
         initializeLabel();
         initializeGraphics();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                printLog(EventLog.getInstance());
+                System.exit(0);
+            }
+        });
+    }
+
+    private void printLog(EventLog instance) {
+        for (Event e : instance) {
+            System.out.println(e);
+        }
+        //carShop.printEventLog(instance.iterator());
     }
 
     //EFFECTS: initializes the graphics of the JFrame.
     private void initializeGraphics() {
         setLayout(null);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         displayMenu();
@@ -96,7 +113,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     //EFFECTS : when a customer from the list is selected and remove button is clicked
     //          this will remove the selected customer.
     private void removeCustomer(int index) {
-        carShop.getCustomers().remove(index);
+        carShop.removeCustomer(carShop.getCustomers().get(index));
         customers.remove(index);
     }
 
@@ -113,7 +130,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
 
     // EFFECTS: Opens the add customer menu.
     private void addCustomer() {
-        new AddCustomerMenuGUI(customers, carShop.getCustomers());
+        new AddCustomerMenuGUI(customers, carShop);
     }
 
     // EFFECTS: saves the workroom to file

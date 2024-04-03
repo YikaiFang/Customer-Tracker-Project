@@ -69,7 +69,7 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
         String make = carMakeField.getText();
         if (n == JOptionPane.OK_OPTION) {
             Car car = new Car(vin, make, model);
-            cars.add(car);
+            customer.addCar(car);
             carInfo.addElement(car.getYear() + " " + car.getMake() + " " + car.getModel());
             customers.set(selectedIndex, informationString(customer));
         }
@@ -79,7 +79,7 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
     //EFFECTS: removes the selected car
     private void removeCarFromList(int index) {
         carInfo.remove(index);
-        cars.remove(index);
+        customer.removeCar(cars.get(index));
         customers.set(selectedIndex, informationString(customer));
     }
 

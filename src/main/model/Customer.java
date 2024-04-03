@@ -41,6 +41,9 @@ public class Customer implements Writable {
     //MODIFIES: this
     //EFFECTS: add a car to the current list of cars and prints the list of cars
     public void addCar(Car car) {
+        EventLog.getInstance().logEvent(new Event("New car added to " + name + ": "
+                + car.getYear() + " " + car.getMake() + " " + car.getModel()));
+
         cars.add(car);
     }
 
@@ -48,6 +51,7 @@ public class Customer implements Writable {
     //MODIFIES: this
     //EFFECTS : changes the name of a customer
     public void changeName(String name) {
+        EventLog.getInstance().logEvent(new Event("Customer name changed from " + this.name + " to " + name));
         this.name = name;
     }
 
@@ -55,6 +59,8 @@ public class Customer implements Writable {
     //MODIFIES: this
     //EFFECTS : changes the email of a customer
     public void changeEmail(String email) {
+        EventLog.getInstance().logEvent(new Event("Customer " + name + " email changed from "
+                + this.email + " to " + email));
         this.email = email;
     }
 
@@ -62,12 +68,17 @@ public class Customer implements Writable {
     //MODIFIES: this
     //EFFECTS : changes the email of a customer
     public void changePhoneNumber(String phoneNumber) {
+        EventLog.getInstance().logEvent(new Event("Customer " + name + " phone number changed from "
+                + this.phoneNumber + " to " + phoneNumber));
         this.phoneNumber = phoneNumber;
     }
 
     //MODIFIES: this
     //EFFECTS : removes the given car from the list of cars and prints a message
     public void removeCar(Car car) {
+        EventLog.getInstance().logEvent(new Event("Car removed from:" + name + ": "
+                + car.getYear() + " " + car.getMake() + " " + car.getModel()));
+
         cars.remove(car);
     }
 
