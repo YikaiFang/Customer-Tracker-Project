@@ -1,11 +1,10 @@
-package ui.tools;
+package ui.menus;
 
 import model.Car;
 import model.Customer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.*;
 
 /*
 Is a customer adder menu where user inputs all the needed information and creates a new customer and adds it
@@ -15,7 +14,7 @@ to the list of customers.
 public class AddCustomerMenu {
 
     private Scanner input;
-    private ArrayList<Customer> customers;
+    private final ArrayList<Customer> customers;
 
     //EFFECTS: Runs the customer menu
     public AddCustomerMenu(ArrayList<Customer> customers) {

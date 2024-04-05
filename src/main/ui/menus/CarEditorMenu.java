@@ -1,11 +1,10 @@
-package ui.tools;
+package ui.menus;
 
 import model.Car;
 import model.Customer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.*;
 
 /*
 Edits and add new cars to a selected customer and takes in a list of the customers current cars.

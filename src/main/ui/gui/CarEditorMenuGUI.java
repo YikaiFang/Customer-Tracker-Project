@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 //Car editor menu which can add and remove cars from a customer
 public class CarEditorMenuGUI extends JFrame implements ActionListener {
@@ -18,7 +17,6 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
     private final DefaultListModel<String> customers;
     private JButton addCar;
     private JButton removeCar;
-    private final List<Car> cars;
     private JLabel title;
     private JTextField carVinField;
     private JTextField carModelField;
@@ -31,7 +29,6 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
         this.selectedIndex = selectedIndex;
         this.customer = customer;
         this.customers = customers;
-        this.cars = customer.getCars();
         initializeFields();
     }
 
@@ -53,7 +50,7 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds the car information to the carInfo DefaultListModel.
     private void setCarInformation() {
-        for (Car c : cars) {
+        for (Car c : customer.getCars()) {
             carInfo.addElement(c.getYear() + " " + c.getModel() + " " + c.getMake());
         }
     }
@@ -79,7 +76,7 @@ public class CarEditorMenuGUI extends JFrame implements ActionListener {
     //EFFECTS: removes the selected car
     private void removeCarFromList(int index) {
         carInfo.remove(index);
-        customer.removeCar(cars.get(index));
+        customer.removeCar(customer.getCars().get(index));
         customers.set(selectedIndex, informationString(customer));
     }
 

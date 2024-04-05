@@ -12,11 +12,13 @@ public class CustomerEditorMenuGUI extends JFrame {
     private JTextField nameField;
     private JTextField emailField;
     private JTextField phoneNumberField;
+    private Customer customer;
 
     //MODIFIES: this, customer
     //EFFECTS: creates a JOptionPane with the customer's personal info to change.
     public CustomerEditorMenuGUI(DefaultListModel<String> customerList, Customer customer, int index) {
         try {
+            this.customer = customer;
             initializeTextFields(customer);
 
             Object[] fields = {"name", nameField, "email", emailField, "phone number", phoneNumberField};
@@ -36,7 +38,7 @@ public class CustomerEditorMenuGUI extends JFrame {
                 if (!phoneNumber.equals(customer.getPhoneNumber())) {
                     customer.changePhoneNumber(phoneNumber);
                 }
-                customerList.set(index, informationString(customer));
+                customerList.set(index, informationString());
             }
         } catch (Exception e) {
             //do nothing
@@ -55,7 +57,7 @@ public class CustomerEditorMenuGUI extends JFrame {
     }
 
     //EFFECTS: returns a string of all the personal info of the customer.
-    private String informationString(Customer customer) {
+    private String informationString() {
         ArrayList<String> cars = new ArrayList<>();
         for (Car c : customer.getCars()) {
             cars.add(c.getYear() + " " + c.getMake() + " " + c.getModel());

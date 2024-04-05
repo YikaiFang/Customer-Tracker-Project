@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.*;
 
 import model.Car;
@@ -82,7 +81,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         removeCustomerButton = new JButton("remove customer");
         saveButton = new JButton("save");
         loadButton = new JButton("load");
-        surpriseButton = new JButton("press for suprise");
+        surpriseButton = new JButton("press for surprise");
         this.add(addCustomerButton);
         this.add(editCustomerButton);
         this.add(editCarsButton);
@@ -236,7 +235,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     }
 
     //MODIFIES: customers,
-    //EFFECTS : adds all the customers and their information into the customers DefualtListModel.
+    //EFFECTS : adds all the customers and their information into the customers DefaultListModel.
     public void savedCustomer() {
         for (Customer customer : carShop.getCustomers()) {
             String information = customer.getName() + " | " + customer.getPhoneNumber() + " | " + customer.getEmail();

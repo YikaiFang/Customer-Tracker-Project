@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistance.Writable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -30,15 +29,6 @@ public class CarShop implements Writable {
     public void removeCustomer(Customer customer) {
         EventLog.getInstance().logEvent(new Event("Customer removed: " + customer.getName()));
         customers.add(customer);
-    }
-
-    public ArrayList<Event> printEventLog(Iterator<Event> events) {
-        ArrayList<Event> allEvents = new ArrayList<>();
-        for (Iterator<Event> it = events; it.hasNext(); ) {
-            Event e = it.next();
-            allEvents.add(e);
-        }
-        return allEvents;
     }
 
     public ArrayList<Customer> getCustomers() {

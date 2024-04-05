@@ -1,11 +1,10 @@
-package ui.tools;
+package ui.menus;
 
 import model.Customer;
 
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.*;
 
 
 /*
@@ -15,7 +14,7 @@ chooses a customer to edit and the providing option to change for the customer
 public class CustomerEditorMenu {
 
     private Scanner input;
-    private ArrayList<Customer> customers;
+    private final ArrayList<Customer> customers;
 
     //EFFECTS: Runs the main customer editor menu
     public CustomerEditorMenu(ArrayList<Customer> customers) {

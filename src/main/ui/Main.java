@@ -1,7 +1,6 @@
 package ui;
 
 import ui.gui.MainMenuGUI;
-import ui.tools.MainMenu;
 
 import java.io.FileNotFoundException;
 

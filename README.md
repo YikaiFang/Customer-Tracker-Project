@@ -75,3 +75,13 @@ Wed Apr 03 13:35:16 PDT 2024
 New car added to jake: 2007 aston martin valkyrie
 Wed Apr 03 13:35:23 PDT 2024
 Customer removed: max
+
+## Phase 4: task 3
+After creating the UML diagram I realized there were a few places where I could have done some refactoring. 
+One example is to create an abstract class for all the menus in the ui package. Since there is a lot of code in it that 
+is repetitive it would be good to have an abstract class as a supertype so that all the subtypes inherit those methods. 
+For example in the gui package specifically all three of the AddCustomerMenuGUI, CarEditorMenuGUI, and 
+CustomerEditorMenuGUI all have the same method informationString() and could be refactored into an abstract class. 
+Another part of my project that I could have refactored is to implement the single responsibility principle more 
+thoroughly. In many parts of my code it violates the single responsibility principle and could be fixed to follow the
+single responsibility principle.

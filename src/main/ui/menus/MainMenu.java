@@ -1,11 +1,10 @@
-package ui.tools;
+package ui.menus;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import javax.swing.*;
 
 import model.Car;
 import model.CarShop;
