@@ -29,8 +29,8 @@ in the future.
 name, email, phone number and cars. 
 - As a user, I want to be able to be able to load specific customers from the file.
 
-## Instruction for grader
-1. press add customer and fill in the required fields, VIN number should be all caps.
+## Instruction for user
+1. press add customer and fill in the required fields
 2. choose any button to press,
 - Edit customer: select a customer from the list by clicking on it and then pressing the edit customer button
 a pop-up with the current customer information will appear and then edit and finally press okay.
@@ -40,48 +40,4 @@ a car select a car by pressing on it in the list and then press remove.
 - Remove customer: select a customer from the list by clicking on it and then pressing the remove button which 
 will result in the removal of the selected customer.
 - Save: click save button to save current customer
-- LOad: click load button to load a past list of customers.
-- Surprise button: click this for a surprise.
-
-## Phase 4: task 2
-The text below is a sample of the event log when the application is run.
-Wed Apr 03 13:33:38 PDT 2024
-Added new customer: mo
-Wed Apr 03 13:33:38 PDT 2024
-New car added to mo: 2002 ford f-150
-Wed Apr 03 13:33:57 PDT 2024
-Added new customer: max
-Wed Apr 03 13:33:57 PDT 2024
-New car added to max: 2001 bmw x5
-Wed Apr 03 13:34:07 PDT 2024
-Customer name changed from mo to jake
-Wed Apr 03 13:34:07 PDT 2024
-Customer jake email changed from mo@gmail.com to jake@gmail.com
-Wed Apr 03 13:34:14 PDT 2024
-Customer max phone number changed from 02349571 to 112364867089
-Wed Apr 03 13:34:31 PDT 2024
-New car added to max: 0 honda civic
-Wed Apr 03 13:34:36 PDT 2024
-Car removed from:max: 0 honda civic
-Wed Apr 03 13:34:45 PDT 2024
-New car added to max: 2002 honda civic
-Wed Apr 03 13:34:55 PDT 2024
-Car removed from:jake: 2002 ford f-150
-Wed Apr 03 13:35:09 PDT 2024
-New car added to jake: 2007 aston martin valkyie
-Wed Apr 03 13:35:13 PDT 2024
-Car removed from:jake: 2007 aston martin valkyie
-Wed Apr 03 13:35:16 PDT 2024
-New car added to jake: 2007 aston martin valkyrie
-Wed Apr 03 13:35:23 PDT 2024
-Customer removed: max
-
-## Phase 4: task 3
-After creating the UML diagram I realized there were a few places where I could have done some refactoring. 
-One example is to create an abstract class for all the menus in the ui package. Since there is a lot of code in it that 
-is repetitive it would be good to have an abstract class as a supertype so that all the subtypes inherit those methods. 
-For example in the gui package specifically all three of the AddCustomerMenuGUI, CarEditorMenuGUI, and 
-CustomerEditorMenuGUI all have the same method informationString() and could be refactored into an abstract class. 
-Another part of my project that I could have refactored is to implement the single responsibility principle more 
-thoroughly. In many parts of my code it violates the single responsibility principle and could be fixed to follow the
-single responsibility principle.
+- Load: click load button to load a past list of customers.

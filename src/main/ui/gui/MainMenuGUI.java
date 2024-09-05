@@ -31,7 +31,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     private JButton removeCustomerButton;
     private JButton saveButton;
     private JButton loadButton;
-    private JButton surpriseButton;
     private JList<String> customerList;
     private DefaultListModel<String> customers;
     public static final int WIDTH = 1000;
@@ -81,14 +80,12 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         removeCustomerButton = new JButton("remove customer");
         saveButton = new JButton("save");
         loadButton = new JButton("load");
-        surpriseButton = new JButton("press for surprise");
         this.add(addCustomerButton);
         this.add(editCustomerButton);
         this.add(editCarsButton);
         this.add(removeCustomerButton);
         this.add(saveButton);
         this.add(loadButton);
-        this.add(surpriseButton);
         customers = new DefaultListModel<>();
         customerList = new JList<>(customers);
         customerList.setBounds(300, 25, 700, 675);
@@ -170,32 +167,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         }
     }
 
-    //EFFECTS: prints a picture to meet the visual requirement.
-    private void surprise() {
-        JFrame frame = new JFrame();
-        ImageIcon imageIcon =
-                new ImageIcon("C:/Users/super/IdeaProjects/project_h4p6l/src/main/gregor-kiczales-2023-profile.jpg");
-        JLabel label = new JLabel(imageIcon);
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width) / 4;
-        int y = (screenSize.height) / 4;
-
-        label.setText("Trust the natural recursion");
-        label.setHorizontalTextPosition(JLabel.CENTER);
-        label.setVerticalTextPosition(JLabel.TOP);
-        label.setIconTextGap(-350);
-        label.setFont(new Font("Courier New", Font.BOLD, 20));
-        label.setForeground(Color.RED);
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(imageIcon.getIconWidth(), imageIcon.getIconHeight());
-        frame.setResizable(false);
-        frame.add(label);
-        frame.setLocation(x, y);
-        frame.setVisible(true);
-    }
-
     // EFFECTS: displays all the buttons and list on the JFrame and their dimensions.
     private void displayMenu() {
         addCustomerButton.setBounds(0, 0, 300, 50);
@@ -210,8 +181,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         saveButton.addActionListener(this);
         loadButton.setBounds(0, 250, 300, 50);
         loadButton.addActionListener(this);
-        surpriseButton.setBounds(0, 300, 300, 400);
-        surpriseButton.addActionListener(this);
     }
 
     //EFFECTS: implemented actionPerformed method from ActionListener interface.
@@ -229,8 +198,6 @@ public class MainMenuGUI extends JFrame implements ActionListener {
             saveCustomers();
         } else if (e.getSource().equals(loadButton)) {
             loadCustomers();
-        } else if (e.getSource().equals(surpriseButton)) {
-            surprise();
         }
     }
 
